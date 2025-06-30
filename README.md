@@ -1,17 +1,16 @@
 # Typed Data Structure
 
-A TypeScript-first library of essential and advanced data structures with full type safety and clean APIs. Ideal for education, production use, and performance-critical applications.
+A TypeScript-first library that provides a production-ready collection of fundamental and advanced data structures implemented in modern TypeScript. The library prioritizes type safety, performance, and developer experience while maintaining minimal, readable code suitable for both educational and production use cases.
 
 ---
 
 ## Features
 
 - Type-safe implementations in modern TypeScript
-- Core structures: Queue, Stack, LRU Cache, Priority Queue
-- Advanced support coming: Trie, Graph, Bloom Filter, BK-Tree, Skip List
+- Core structures: Queue, Stack, LRU Cache, Priority Queue, Bloom Filter, BK-Tree
+- Advanced support coming: Trie, Skip List
 - Minimal, clean, readable codebase for learning and use
 - Full test coverage with Jest
-- Clean module exports with support for `@` alias
 
 ---
 
@@ -23,14 +22,12 @@ A TypeScript-first library of essential and advanced data structures with full t
 | Stack            | `stack.ts`           | LIFO stack                                    |
 | LRU Cache        | `lru-cache.ts`       | Least Recently Used cache with eviction       |
 | Priority Queue   | `priority-queue.ts`  | Min/Max heap-based priority queue             |
-| Bloom Filter     | `bloom-filter.ts`    | Bloomfilter  |
+| Bloom Filter     | `bloom-filter.ts`    | Probabilistic structure for fast membership checking |
+| BK-Tree          | `bk-tree.ts`         | Approximate string matching with edit distance |
 
 Coming Soon:
 - Trie
-- Bloom Filter
-- BK-Tree
 - Skip List
-- Graph (adjacency list)
 
 ---
 
@@ -41,10 +38,13 @@ Coming Soon:
 ```bash
 npm install @pujansrt/dsx-ts
 ```
+
 ## 2. Import and Use
 
 
 ### Example: Queue
+A basic first-in-first-out structure ideal for buffering or scheduling tasks.
+
 ```typescript
 import { Queue } from "@pujansrt/dsx-ts";
 const queue = new Queue<number>();
@@ -54,6 +54,8 @@ console.log(queue.dequeue()); // 1
 ```
 
 ### Example: Priority Queue
+Use a priority queue when elements need to be processed based on their priority (e.g., job scheduling, pathfinding like Dijkstra's algorithm)
+
 ```typescript
 const pq: PriorityQueue<number> = new PriorityQueue(); // min-heap by default
 pq.add(30);
@@ -66,6 +68,8 @@ while(!pq.isEmpty()) {
 }
 ```
 ### Example: LRU Cache
+Useful for caching recently used items with automatic eviction of the least recently accessed entries.
+
 ```typescript
 const cache: LRUCache<string, number>  = new LRUCache(2);
 cache.put('a', 10);
@@ -74,6 +78,8 @@ console.log("Cache value = ",cache.get('a'));
 ```
 
 ### Example: Bloom Filter
+Best for fast approximate membership checks at large scale (e.g., checking whether an email has already been seen). Very space-efficient with controlled false positives.
+
 ```typescript
 const filter: BloomFilter  = new BloomFilter(100, [hashFnv1a, hashDjb2]);
 const items = ['apple', 'banana', 'kiwi'];
@@ -81,3 +87,23 @@ items.forEach((i) => filter.add(i));
 const falsePositive = filter.has('peach');
 console.log(falsePositive);
 ```
+
+### Example: BK-Tree
+Used for fuzzy matching and typo-tolerant search (e.g., spellcheck, autocorrect). Efficient for nearest-neighbor search based on edit distance.
+
+```typescript
+import { BKTree } from "@pujansrt/dsx-ts";
+const tree = new BKTree<string>(levenshtein);
+['book', 'back', 'boon', 'cook', 'nook'].forEach((word) => tree.add(word));
+const results = tree.search('book', 1);
+console.log(results); // ['book', 'boon', 'cook']
+```
+
+## Contributing
+Feel free to fork and submit PRs to add more data structures or improve performance. Suggestions and feedback welcome!
+
+## License
+MIT License — free for personal and commercial use.
+
+## 👤 Author
+Developed and maintained by Pujan Srivastava, a mathematician and software engineer with 18+ years of programming experience.
