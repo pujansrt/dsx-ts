@@ -1,4 +1,8 @@
 # Typed Data Structure
+[![npm version](https://img.shields.io/npm/v/@pujansrt/dsx-ts)](https://www.npmjs.com/package/@pujansrt/dsx-ts)
+[![install size](https://packagephobia.com/badge?p=@pujansrt/dsx-ts)](https://packagephobia.com/result?p=@pujansrt/dsx-ts)
+[![codecov](https://codecov.io/gh/pujansrt/dsx-ts/branch/production/graph/badge.svg)](https://codecov.io/gh/pujansrt/dsx-ts)
+
 
 A TypeScript-first library that provides a production-ready collection of fundamental and advanced data structures implemented in modern TypeScript. The library prioritizes type safety, performance, and developer experience while maintaining minimal, readable code suitable for both educational and production use cases.
 
