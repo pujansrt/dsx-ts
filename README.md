@@ -62,7 +62,7 @@ pq.add(70);
 pq.add(50);
 
 while(!pq.isEmpty()) {
-    console.log("v=",pq.dequeue());
+    console.log("v=",pq.poll());
 }
 ```
 ### Example: LRU Cache
