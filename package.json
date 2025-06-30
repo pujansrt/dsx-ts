@@ -1,7 +1,8 @@
 {
   "name": "@pujansrt/dsx-ts",
-  "version": "1.0.7",
-  "keywords": [ "typescript",
+  "version": "1.0.9",
+  "keywords": [
+    "typescript",
     "bloom filter",
     "dsx",
     "stack",
@@ -33,7 +34,8 @@
     "jest": "^30.0.3",
     "jest-coverage-badges": "^1.1.2",
     "prettier": "^3.6.2",
-    "ts-jest": "^29.4.0"
+    "ts-jest": "^29.4.0",
+    "tsup": "^8.5.0"
   },
   "jest": {
     "preset": "ts-jest",
@@ -42,7 +44,8 @@
       "<rootDir>/tests"
     ],
     "moduleFileExtensions": [
-      "ts", "js"
+      "ts",
+      "js"
     ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"

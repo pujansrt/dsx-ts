@@ -124,6 +124,13 @@ const text = 'ushers';
 const matches = ac.search(text);
 console.log(matches);
 ```
+## Build and Publish
+
+```bash
+tsc
+npx tsup
+npm publish --access public
+```
 
 ## Contributing
 Feel free to fork and submit PRs to add more data structures or improve performance. Suggestions and feedback welcome!
