@@ -16,14 +16,15 @@ A TypeScript-first library that provides a production-ready collection of fundam
 
 ## Data Structures Included
 
-| Structure        | File                 | Description                                   |
-|------------------|----------------------|-----------------------------------------------|
-| Queue            | `queue.ts`           | FIFO queue with optional capacity             |
-| Stack            | `stack.ts`           | LIFO stack                                    |
-| LRU Cache        | `lru-cache.ts`       | Least Recently Used cache with eviction       |
-| Priority Queue   | `priority-queue.ts`  | Min/Max heap-based priority queue             |
-| Bloom Filter     | `bloom-filter.ts`    | Probabilistic structure for fast membership checking |
-| BK-Tree          | `bk-tree.ts`         | Approximate string matching with edit distance |
+| Structure      | File                | Description                                          |
+|----------------|---------------------|------------------------------------------------------|
+| Queue          | `queue.ts`          | FIFO queue with optional capacity                    |
+| Stack          | `stack.ts`          | LIFO stack                                           |
+| LRU Cache      | `lru-cache.ts`      | Least Recently Used cache with eviction              |
+| TTL Cache      | `ttl-cache.ts`      | TTL cache with expiring value                        |
+| Priority Queue | `priority-queue.ts` | Min/Max heap-based priority queue                    |
+| Bloom Filter   | `bloom-filter.ts`   | Probabilistic structure for fast membership checking |
+| BK-Tree        | `bk-tree.ts`        | Approximate string matching with edit distance       |
 
 Coming Soon:
 - Trie
@@ -76,6 +77,19 @@ cache.put('a', 10);
 cache.put('b', 20);
 console.log("Cache value = ",cache.get('a'));
 ```
+### Example: Auto Expiring Cache (TTL Cache)
+A cache that automatically removes items after a specified time-to-live (TTL).
+
+```typescript
+import { TTLCache } from "@pujansrt/dsx-ts";
+const cache: TTLCache<string, number> = new TTLCache(1000); // 1 second TTL
+cache.put('a', 10);
+setTimeout(() => {
+    console.log(cache.get('a')); // undefined, as it has expired
+}, 1100);
+```
+
+
 
 ### Example: Bloom Filter
 Best for fast approximate membership checks at large scale (e.g., checking whether an email has already been seen). Very space-efficient with controlled false positives.

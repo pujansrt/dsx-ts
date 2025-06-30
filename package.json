@@ -1,11 +1,14 @@
 {
   "name": "@pujansrt/dsx-ts",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "keywords": [ "typescript",
     "bloom filter",
     "dsx",
     "stack",
     "queue",
+    "bk tree",
+    "ttl cache",
+    "lru cache",
     "data structure"
   ],
   "license": "MIT",
