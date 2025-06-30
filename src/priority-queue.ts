@@ -1,33 +1,45 @@
+/**
+ * Priority Queue implementation using a binary heap.
+ * This implementation allows for custom comparison functions.
+ *
+ * @author Pujan Srivastava
+ */
 export class PriorityQueue<T> {
   private heap: T[] = [];
   private comparator: (a: T, b: T) => number;
 
-  constructor(comparator: (a: T, b: T) => number) {
-    this.comparator = comparator;
+  constructor(comparator?: (a: T, b: T) => number) {
+    this.comparator =
+      comparator ??
+      ((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+      });
   }
 
-  size(): number {
+  public size(): number {
     return this.heap.length;
   }
 
-  isEmpty(): boolean {
-    return this.size() === 0;
+  public isEmpty(): boolean {
+    return this.heap.length === 0;
   }
 
-  peek(): T | undefined {
+  public peek(): T | undefined {
     return this.heap[0];
   }
 
-  enqueue(item: T): void {
+  public add(item: T): void {
     this.heap.push(item);
     this.bubbleUp();
   }
 
-  dequeue(): T | undefined {
+  public poll(): T | undefined {
     if (this.isEmpty()) return undefined;
     const top = this.heap[0];
     const bottom = this.heap.pop();
-    if (this.size() > 0 && bottom !== undefined) {
+    if (this.heap.length > 0 && bottom !== undefined) {
       this.heap[0] = bottom;
       this.bubbleDown();
     }
@@ -41,12 +53,12 @@ export class PriorityQueue<T> {
     while (index > 0) {
       const parentIndex = Math.floor((index - 1) / 2);
       const parent = this.heap[parentIndex];
-
       if (this.comparator(item, parent) >= 0) break;
 
       this.heap[index] = parent;
       index = parentIndex;
     }
+
     this.heap[index] = item;
   }
 
@@ -56,16 +68,16 @@ export class PriorityQueue<T> {
     const item = this.heap[0];
 
     while (true) {
-      let leftIdx = 2 * index + 1;
-      let rightIdx = 2 * index + 2;
+      const left = 2 * index + 1;
+      const right = 2 * index + 2;
       let smallest = index;
 
-      if (leftIdx < length && this.comparator(this.heap[leftIdx], this.heap[smallest]) < 0) {
-        smallest = leftIdx;
+      if (left < length && this.comparator(this.heap[left], this.heap[smallest]) < 0) {
+        smallest = left;
       }
 
-      if (rightIdx < length && this.comparator(this.heap[rightIdx], this.heap[smallest]) < 0) {
-        smallest = rightIdx;
+      if (right < length && this.comparator(this.heap[right], this.heap[smallest]) < 0) {
+        smallest = right;
       }
 
       if (smallest === index) break;

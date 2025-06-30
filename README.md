@@ -41,12 +41,34 @@ Coming Soon:
 ```bash
 npm install @pujansrt/dsx-ts
 ```
-### 2. Import and Use
+## 2. Import and Use
 
+
+### Example: Queue
 ```typescript
 import { Queue } from "@pujansrt/dsx-ts";
 const queue = new Queue<number>();
 queue.enqueue(1);
 queue.enqueue(2);
 console.log(queue.dequeue()); // 1
+```
+
+### Example: Priority Queue
+```typescript
+let pq: PriorityQueue<number> = new PriorityQueue(); // min-heap by default
+pq.add(30);
+pq.add(10);
+pq.add(70);
+pq.add(50);
+
+while(!pq.isEmpty()) {
+    console.log("v=",pq.dequeue());
+}
+```
+### Example: LRU Cache
+```typescript
+let cache: LRUCache<string, number>  = new LRUCache(2);
+cache.put('a', 10);
+cache.put('b', 20);
+console.log("Cache value = ",cache.get('a'));
 ```
