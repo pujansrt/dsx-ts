@@ -1,6 +1,6 @@
 {
   "name": "@pujansrt/dsx-ts",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "keywords": [ "typescript",
     "bloom filter",
     "dsx",

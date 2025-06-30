@@ -25,10 +25,7 @@ A TypeScript-first library that provides a production-ready collection of fundam
 | Priority Queue | `priority-queue.ts` | Min/Max heap-based priority queue                    |
 | Bloom Filter   | `bloom-filter.ts`   | Probabilistic structure for fast membership checking |
 | BK-Tree        | `bk-tree.ts`        | Approximate string matching with edit distance       |
-
-Coming Soon:
-- Trie
-- Skip List
+| Aho Corasick   | `aho-corasick.ts`   | Aho Corasick string matching algorithm               |
 
 ---
 
@@ -111,6 +108,17 @@ const tree = new BKTree<string>(levenshtein);
 ['book', 'back', 'boon', 'cook', 'nook'].forEach((word) => tree.add(word));
 const results = tree.search('book', 1);
 console.log(results); // ['book', 'boon', 'cook']
+```
+
+### Example: Aho Corasick String Matching
+The Aho-Corasick algorithm is a powerful and efficient string-matching algorithm. If you have a fixed set of "keywords" (a dictionary) that you want to find in a potentially very long input string, Aho-Corasick is highly efficient.
+
+```typescript
+import { AhoCorasick } from "@pujansrt/dsx-ts";
+const ac = new AhoCorasick(['he', 'she', 'his', 'hers']);
+const text = 'ushers';
+const matches = ac.search(text);
+console.log(matches);
 ```
 
 ## Contributing
