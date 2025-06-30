@@ -1,13 +1,11 @@
 /**
  * A simple Bloom Filter implementation in TypeScript. Probabilistic Membership Checker
- *
  * Does not store actual data — only hashed bits.
  *
  * Ideal for:
  *   * Checking if a value might exist
  *   * Early-out filters to avoid DB/cache/network calls
  *   * Scenarios where memory is tight (IoT, web proxies, edge caches)
- *
  *
  * @author Pujan Srivastava
  */

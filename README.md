@@ -55,7 +55,7 @@ console.log(queue.dequeue()); // 1
 
 ### Example: Priority Queue
 ```typescript
-let pq: PriorityQueue<number> = new PriorityQueue(); // min-heap by default
+const pq: PriorityQueue<number> = new PriorityQueue(); // min-heap by default
 pq.add(30);
 pq.add(10);
 pq.add(70);
@@ -67,8 +67,17 @@ while(!pq.isEmpty()) {
 ```
 ### Example: LRU Cache
 ```typescript
-let cache: LRUCache<string, number>  = new LRUCache(2);
+const cache: LRUCache<string, number>  = new LRUCache(2);
 cache.put('a', 10);
 cache.put('b', 20);
 console.log("Cache value = ",cache.get('a'));
+```
+
+### Example: Bloom Filter
+```typescript
+const filter: BloomFilter  = new BloomFilter(100, [hashFnv1a, hashDjb2]);
+const items = ['apple', 'banana', 'kiwi'];
+items.forEach((i) => filter.add(i));
+const falsePositive = filter.has('peach');
+console.log(falsePositive);
 ```

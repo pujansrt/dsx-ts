@@ -1,13 +1,10 @@
-import { BloomFilter } from '@/bloom-filter';
-
-const hash1 = (str: string) => str.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-const hash2 = (str: string) => str.split('').reduce((acc, char, idx) => acc + char.charCodeAt(0) * (idx + 1), 0);
+import { BloomFilter, hashDjb2, hashFnv1a } from '@/bloom-filter';
 
 describe('BloomFilter', () => {
   let filter: BloomFilter;
 
   beforeEach(() => {
-    filter = new BloomFilter(100, [hash1, hash2]);
+    filter = new BloomFilter(100, [hashFnv1a, hashDjb2]);
   });
 
   test('returns false for item not added', () => {
@@ -38,7 +35,7 @@ describe('BloomFilter', () => {
   });
 
   test('is likely to produce false positives with small size', () => {
-    const smallFilter = new BloomFilter(10, [hash1, hash2]);
+    const smallFilter = new BloomFilter(10, [hashFnv1a, hashDjb2]);
     const items = ['a', 'b', 'c', 'd', 'e'];
 
     items.forEach((i) => smallFilter.add(i));
