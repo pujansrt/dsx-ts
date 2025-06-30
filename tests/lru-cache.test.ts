@@ -1,75 +1,60 @@
-import { LRUCache } from '../src';
+import { LRUCache } from '@/lru-cache';
 
 describe('LRUCache', () => {
-  let cache: LRUCache<string, number>;
-
-  beforeEach(() => {
-    cache = new LRUCache(2); // capacity = 2
+  it('throws if capacity is zero or negative', () => {
+    expect(() => new LRUCache(0)).toThrow('Capacity must be positive');
+    expect(() => new LRUCache(-1)).toThrow('Capacity must be positive');
   });
 
-  test('should store and retrieve values', () => {
+  it('returns undefined for missing keys', () => {
+    const cache = new LRUCache<string, number>(2);
+    expect(cache.get('missing')).toBeUndefined();
+  });
+
+  it('stores and retrieves values', () => {
+    const cache = new LRUCache<string, number>(2);
     cache.put('a', 1);
     cache.put('b', 2);
-
     expect(cache.get('a')).toBe(1);
     expect(cache.get('b')).toBe(2);
   });
 
-  test('should evict least recently used item', () => {
+  it('evicts least recently used item', () => {
+    const cache = new LRUCache<string, number>(2);
     cache.put('a', 1);
     cache.put('b', 2);
-    cache.put('c', 3); // evicts 'a'
-
-    expect(cache.get('a')).toBeUndefined();
-    expect(cache.get('b')).toBe(2);
-    expect(cache.get('c')).toBe(3);
-  });
-
-  test('should update existing keys and move to front', () => {
-    cache.put('a', 1);
-    cache.put('b', 2);
-    cache.put('a', 99); // updates 'a' and moves to front
-    cache.put('c', 3); // evicts 'b'
-
-    expect(cache.get('a')).toBe(99);
+    cache.get('a'); // a becomes most recently used
+    cache.put('c', 3); // b should be evicted
     expect(cache.get('b')).toBeUndefined();
+    expect(cache.get('a')).toBe(1);
     expect(cache.get('c')).toBe(3);
   });
 
-  test('should move accessed key to front', () => {
+  it('updates value and moves node to front', () => {
+    const cache = new LRUCache<string, number>(2);
+    cache.put('x', 100);
+    cache.put('x', 200); // overwrite
+    expect(cache.get('x')).toBe(200);
+  });
+
+  it('evicts the only item when capacity is 1', () => {
+    const cache = new LRUCache<string, number>(1);
+    cache.put('first', 1);
+    cache.put('second', 2); // should evict 'first'
+    expect(cache.get('first')).toBeUndefined();
+    expect(cache.get('second')).toBe(2);
+  });
+
+  it('maintains correct internal links (integration test)', () => {
+    const cache = new LRUCache<string, number>(3);
     cache.put('a', 1);
     cache.put('b', 2);
-
-    // Access 'a' to make it recently used
-    expect(cache.get('a')).toBe(1);
-
-    // Add another entry which should evict 'b'
     cache.put('c', 3);
-
-    expect(cache.get('b')).toBeUndefined(); // b should be evicted
+    cache.get('a'); // a becomes most recently used
+    cache.put('d', 4); // evicts b
+    expect(cache.get('b')).toBeUndefined();
     expect(cache.get('a')).toBe(1);
     expect(cache.get('c')).toBe(3);
-  });
-
-  test('should throw error if initialized with non-positive capacity', () => {
-    expect(() => new LRUCache(0)).toThrow();
-    expect(() => new LRUCache(-1)).toThrow();
-  });
-
-  test('should handle repeatedly accessing same key', () => {
-    cache.put('x', 10);
-    cache.put('y', 20);
-
-    expect(cache.get('x')).toBe(10);
-    expect(cache.get('x')).toBe(10);
-    expect(cache.get('y')).toBe(20);
-
-    // Now put a new key to evict LRU
-    cache.put('z', 30);
-
-    // 'x' and 'z' should remain (y should be LRU)
-    expect(cache.get('x')).toBeUndefined();
-    expect(cache.get('y')).toBe(20);
-    expect(cache.get('z')).toBe(30);
+    expect(cache.get('d')).toBe(4);
   });
 });

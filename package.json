@@ -1,6 +1,6 @@
 {
   "name": "@pujansrt/dsx-ts",
-  "version": "1.0.8",
+  "version": "1.0.7",
   "keywords": [ "typescript",
     "bloom filter",
     "dsx",
@@ -42,8 +42,7 @@
       "<rootDir>/tests"
     ],
     "moduleFileExtensions": [
-      "ts",
-      "js"
+      "ts", "js"
     ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/src/$1"

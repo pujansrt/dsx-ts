@@ -4,7 +4,6 @@ describe('AhoCorasick', () => {
   it('should find all pattern matches in the text', () => {
     const ac = new AhoCorasick(['he', 'she', 'his', 'hers']);
     const matches = ac.search('ushers');
-    console.log(matches);
 
     const expected = ['she', 'he', 'hers'];
     const found = matches.map((m) => m.match);
