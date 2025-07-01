@@ -1,4 +1,4 @@
-import { Queue } from '../src';
+import { Queue } from '@/queue';
 
 describe('Queue', () => {
   test('enqueue and dequeue in FIFO order', () => {

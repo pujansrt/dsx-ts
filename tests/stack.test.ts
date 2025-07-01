@@ -7,13 +7,13 @@ describe('Stack', () => {
     stack = new Stack<number>();
   });
 
-  it('should start empty', () => {
+  test('should start empty', () => {
     expect(stack.size()).toBe(0);
     expect(stack.peek()).toBeUndefined();
     expect(stack.pop()).toBeUndefined();
   });
 
-  it('should push and pop items in LIFO order', () => {
+  test('should push and pop items in LIFO order', () => {
     stack.push(10);
     stack.push(20);
     stack.push(30);
@@ -26,21 +26,21 @@ describe('Stack', () => {
     expect(stack.size()).toBe(0);
   });
 
-  it('should respect the stack capacity', () => {
+  test('should respect the stack capacity', () => {
     const limitedStack = new Stack<number>(2);
     limitedStack.push(1);
     limitedStack.push(2);
     expect(() => limitedStack.push(3)).toThrow('Stack has reached max capacity, you cannot add more items');
   });
 
-  it('should allow peek without popping', () => {
+  test('should allow peek without popping', () => {
     stack.push(99);
     expect(stack.peek()).toBe(99);
     expect(stack.size()).toBe(1);
     expect(stack.pop()).toBe(99);
   });
 
-  it('should work with strings or other types', () => {
+  test('should work with strings or other types', () => {
     const stringStack = new Stack<string>();
     stringStack.push('a');
     stringStack.push('b');

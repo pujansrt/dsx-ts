@@ -7,12 +7,12 @@ describe('TTLCache', () => {
     cache = new TTLCache(100); // 100ms TTL
   });
 
-  it('should store and retrieve values within TTL', () => {
+  test('should store and retrieve values within TTL', () => {
     cache.set('a', 1);
     expect(cache.get('a')).toBe(1);
   });
 
-  it('should return undefined after TTL expires', (done) => {
+  test('should return undefined after TTL expires', (done) => {
     cache.set('a', 42);
     setTimeout(() => {
       expect(cache.get('a')).toBeUndefined();
@@ -20,27 +20,27 @@ describe('TTLCache', () => {
     }, 150);
   });
 
-  it('should delete a key manually', () => {
+  test('should delete a key manually', () => {
     cache.set('a', 123);
     cache.delete('a');
     expect(cache.get('a')).toBeUndefined();
   });
 
-  it('should check presence with has()', () => {
+  test('should check presence with has()', () => {
     cache.set('x', 9);
     expect(cache.has('x')).toBe(true);
     cache.delete('x');
     expect(cache.has('x')).toBe(false);
   });
 
-  it('should clear all entries', () => {
+  test('should clear all entries', () => {
     cache.set('a', 1);
     cache.set('b', 2);
     cache.clear();
     expect(cache.size()).toBe(0);
   });
 
-  it('should purge only expired entries', (done) => {
+  test('should purge only expired entries', (done) => {
     cache.set('a', 1);
     cache.set('b', 2);
     setTimeout(() => {

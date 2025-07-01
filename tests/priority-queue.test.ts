@@ -1,4 +1,4 @@
-import { PriorityQueue } from '../src';
+import { PriorityQueue } from '@/priority-queue';
 
 describe('PriorityQueue - Min Heap', () => {
   let pq: PriorityQueue<number>;
